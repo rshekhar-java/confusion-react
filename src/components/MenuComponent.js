@@ -1,28 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Card, CardImg, CardImgOverlay, CardTitle } from 'reactstrap';
-class Menu extends Component {
-    constructor(props) {
-        super(props);
 
-        console.log("menu constructor invoked");
-       
+    //one way to define function --- can be done as function <functionname>(props){}
+    function RenderMenuItem({dish,onClick}){
+        return(
+            <Card  key={dish.id} style={{ cursor: "pointer" }} onClick={()=>onClick(dish.id)}>
+                <CardImg width="100%" src={dish.image} alt={dish.name} />                  
+                <CardImgOverlay>
+                    <CardTitle>{dish.name}</CardTitle>
+                </CardImgOverlay>
+            </Card>
+
+        );
     }
 
-    componentDidMount(){
-        console.log("menu componentDidMount invoked");
-    }
-
-    render() {
-        console.log("menu render method called");
-        const menu = this.props.dishes.map((dish) => {
+    //anotehr way to define function using arrow function
+    const Menu = (props) => {
+        const menu = props.dishes.map((dish) => {
             return (
               <div  className="col-12 col-md-5 m-1">
-                <Card  key={dish.id} style={{ cursor: "pointer" }} onClick={()=>this.props.onClick(dish.id)}>
-                    <CardImg width="100%" src={dish.image} alt={dish.name} />                  
-                    <CardImgOverlay>
-                        <CardTitle>{dish.name}</CardTitle>
-                    </CardImgOverlay>
-                </Card>
+                  <RenderMenuItem dish={dish} onClick={props.onClick} />
               </div>
             );
         });
@@ -34,5 +31,5 @@ class Menu extends Component {
             </div>
         );
     }
-}
+
 export default Menu;
