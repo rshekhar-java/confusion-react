@@ -12,10 +12,10 @@ class DishDetail extends Component{
     }
 
     renderDish(dish){
-        if(dish !== null){
+        if(dish != null){
             return(
                 <Card>
-                     <CardImg width="-50%" src={dish.image} alt={dish.name} />
+                     <CardImg width='100%' src={dish.image} alt={dish.name} />
                      <CardBody>
                          <CardTitle>{dish.name}</CardTitle>
                          <CardText>{dish.description}</CardText>
@@ -35,10 +35,11 @@ class DishDetail extends Component{
             return(
                  <div className='col-12 col-md-5 m-1'>
                     <h4><strong>Comments</strong></h4>
-                    <ul className='list-unstyled'>
+                    <ul className='list-unstyled' key={comments.id}>
                          {comments.map(eachComment => {
                              return(<p>{eachComment.comment}<br/>
-                             -- <em>{eachComment.author}</em>, <span>{new Date(eachComment.date).toLocaleDateString()}</span>
+                             {/* -- <em>{eachComment.author}</em>, <span>{new Date(eachComment.date).toLocaleDateString()}</span> */}
+                             -- <em>{eachComment.author}</em>, <span>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(eachComment.date)))}</span>
                              </p>)
                          })}
                     </ul>
@@ -58,16 +59,15 @@ class DishDetail extends Component{
         (dish == null) ? comments = [] : comments = dish.comments;
 
         return(
-            <div className='row'>
-                  <div  className="col-12 col-md-5 m-1">
-                        {this.renderDish(dish)}
-
+            <div className ="container">
+                <div className='row'>
+                    <div className="col-12 col-md-5 m-1">
+                            {this.renderDish(dish)}
+                    </div>
+                    <div className="m-5 col-5">
+                        {this.renderComments(comments)}
+                    </div>                    
                 </div>
-                 <div className="m-5 col-5">
-                    {this.renderComments(comments)}
-                </div>
-                
-                    
             </div>
         )
 
