@@ -36,7 +36,7 @@ export const COMMENTS =
         id: 4,
         dishId: 0,
         rating: 2,
-        comment: "It's your birthday, we're gonna party!",
+        comment: "It's your birthday, we're gonna party!Yummy :)",
         author: "25 Cent",
         date: "2011-12-02T17:57:28.556094Z"
     },
@@ -116,7 +116,7 @@ export const COMMENTS =
         id: 14,
         dishId: 2,
         rating: 2,
-        comment: "It's your birthday, we're gonna party!",
+        comment: "It's your birthday, we're gonna party! awesome!!",
         author: "25 Cent",
         date: "2011-12-02T17:57:28.556094Z"
     },
@@ -156,7 +156,7 @@ export const COMMENTS =
         id: 19,
         dishId: 3,
         rating: 2,
-        comment: "It's your birthday, we're gonna party!",
+        comment: "It's your birthday, we're gonna party! wonderful experience!",
         author: "25 Cent",
         date: "2011-12-02T17:57:28.556094Z"
     }
