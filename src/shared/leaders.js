@@ -29,7 +29,7 @@ export const LEADERS = [
     {
       id: 3,
       name: 'Ravi Shekhar',
-      image: '/assets/images/raviimage.jpg',
+      image: '/assets/images/raviimg-resize.jpg',
       designation: 'Executive Chef',
       abbr: 'EC',
       featured: true,
