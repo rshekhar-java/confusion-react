@@ -27,3 +27,11 @@ address{
 .navbar-dark {
     background-color: #4a2a96;
 }
+.modal-header{
+    background-color: #4a2a96;
+    color: white;
+}
+.modal-body{
+    background-color:#6d5597;
+    color:whitesmoke;
+}
