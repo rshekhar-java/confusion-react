@@ -30,22 +30,26 @@ const minLength = (len) => (val) => val && (val.length >= len);
         }
     }
 
-    function RenderComments({comments}){
+    function RenderComments({comments,addComment, dishId}){
         if(comments != null){ 
             return(
                 <React.Fragment>
                     <div className='col-12 col-md-5 m-1'>
                         <h4><strong>Comments</strong></h4>
-                        <ul className='list-unstyled' key={comments.id}>
-                            {comments.map(eachComment => {
-                                return(<p>{eachComment.comment}<br/>
-                                {/* -- <em>{eachComment.author}</em>, <span>{new Date(eachComment.date).toLocaleDateString()}</span> */}
-                                -- <em>{eachComment.author}</em>, <span>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(eachComment.date)))}</span>
-                                </p>)
+                        <ul className='list-unstyled'>
+                            {comments.map((comment) => {
+                                return(
+                                <li >
+                                    <p>{comment.comment}<br/>
+                                    {/* -- <em>{comment.author}</em>, <span>{new Date(comment.date).toLocaleDateString()}</span> */}
+                                    -- <em>{comment.author}</em>, <span>{new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</span>
+                                    </p>
+                                </li>
+                                );
                             })}
                         </ul>
+                        <CommentForm dishId={dishId} addComment={addComment} />    
                     </div>
-                    <CommentForm />
                 </React.Fragment>
             );
             
@@ -77,7 +81,9 @@ const minLength = (len) => (val) => val && (val.length >= len);
                                 <RenderDish dish={props.dish} />
                         </div>
                         <div className="m-5 col-5">
-                            <RenderComments comments={props.comments} />
+                            <RenderComments comments={props.comments} 
+                                addComment={props.addComment}
+                                dishId={props.dish.id} />
                         </div>                    
                     </div>
                 </div>
@@ -104,7 +110,7 @@ class CommentForm extends Component {
           };
     }
 
-    toggleModal() {
+    toggleModal = ()=> {
         this.setState({
           isModalOpen: !this.state.isModalOpen
         });
@@ -112,8 +118,10 @@ class CommentForm extends Component {
 
     handleSubmitComment(values) {
         this.toggleModal();
-        console.log('Current State is: ' + JSON.stringify(values));
+        // console.log('Current State is: ' + JSON.stringify(values));
         alert('Current State is: ' + JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.author, values.Comment);
+
     }
 
     render(){
@@ -138,9 +146,9 @@ class CommentForm extends Component {
                                         </Col>
                                 </Row>
                                 <Row className="form-group">
-                                        <Label htmlFor="name" md={2}>Your Name</Label>
+                                        <Label htmlFor="author" md={2}>Your Name</Label>
                                         <Col md={10}>
-                                            <Control.text model=".name" id="name" name="name"
+                                            <Control.text model=".author" id="author" name="author"
                                                 placeholder="Your Name"
                                                 className="form-control"
                                                 validators={{
@@ -149,7 +157,7 @@ class CommentForm extends Component {
                                                     />
                                             <Errors
                                                 className="text-danger"
-                                                model=".name"
+                                                model=".author"
                                                 show="touched"
                                                 messages={{
                                                     required: 'Required',
