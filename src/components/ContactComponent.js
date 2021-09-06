@@ -3,6 +3,8 @@ import React,{ Component } from 'react';
 import { Breadcrumb, BreadcrumbItem,Button,Label,Col,Row} from 'reactstrap';
 import { Control,Form, Errors,actions } from 'react-redux-form';
 import { Link } from 'react-router-dom';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
+
 
 const required = (val) => val && val.length;
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
@@ -18,8 +20,9 @@ class Contact extends Component {
 
 
     handleSubmit(values){
-        console.log('Current State is: ' + JSON.stringify(values));
-        alert('Current State is: ' + JSON.stringify(values));
+        // console.log('Current State is: ' + JSON.stringify(values));
+        // alert('Current State is: ' + JSON.stringify(values));
+        this.props.postFeedback(values)
         this.props.resetFeedbackForm();
         // event.preventDefault();
 
@@ -28,6 +31,7 @@ class Contact extends Component {
     render(){
 
         return(
+            <FadeTransform in transformProps={{ exitTransform: 'scale(0.5) translateY(-50%)' }}>
             <div className="container">
                 <div className="row">
                     <Breadcrumb>
@@ -197,6 +201,7 @@ class Contact extends Component {
                     </div>
                 </div>
             </div>
+            </FadeTransform>
         );
     }
 }
