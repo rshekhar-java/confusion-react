@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-pascal-case */
 import React,{ Component } from 'react';
 import { Breadcrumb, BreadcrumbItem,Button,Label,Col,Row} from 'reactstrap';
-import { Control,Form, Errors,actions } from 'react-redux-form';
+import { Control,Form, Errors } from 'react-redux-form';
 import { Link } from 'react-router-dom';
-import { FadeTransform, Fade, Stagger } from 'react-animation-components';
+import { FadeTransform } from 'react-animation-components';
 
 
 const required = (val) => val && val.length;
